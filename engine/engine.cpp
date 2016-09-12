@@ -6,11 +6,14 @@
  */
 
 #include <iostream>
+#include "vector.h"
 
 using namespace std;
 
 int main (void) {
   
   cout << "Hello, world!" << endl;
+  Vector<double> v = Vector<double>(4);
+  cout << v.getSize() << endl;
   
 }
