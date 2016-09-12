@@ -12,8 +12,12 @@ using namespace std;
 
 int main (void) {
   
-  cout << "Hello, world!" << endl;
-  Vector<double> v = Vector<double>(4);
-  cout << v.getSize() << endl;
+    double arr[3] = {3, 6, 1};
+    cout << arr[2] << endl;
+    
+    Vector v1 = Vector(4, arr);
+    Vector v2 = Vector(4, arr);
+    cout << v1.getSize() << endl;
+    cout << v1.dot(v2) << endl;
   
 }

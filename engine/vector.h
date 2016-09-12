@@ -5,23 +5,50 @@
  * vector.h - header for a vector class that supports std vector ops.
  */
 
-template <typename T>
 class Vector {
-  T* arr;
-  int size;
+    double *params;
+    int size;
 
- public:
-  Vector(int = 3);
-  int getSize() const;
+public:
+    Vector(int, double *);
+    ~Vector();
+    int getSize() const;
+    double dot(Vector) const;
 
 };
 
-template <typename T>
-Vector<T>::Vector(int s) {
-  size = s;
+Vector::Vector(int s, double *arr) {
+    size = s;
+    
+    for (int i = 0; i < s; i++) {
+        params[i] = arr[i];
+    }
 }
 
-template <typename T> 
-int Vector<T>::getSize() const {
+Vector::~Vector() {
+    delete[] params;
+}
+
+int Vector::getSize() const {
   return size;
+}
+
+
+double Vector::dot(Vector v) const {
+    
+    double product = 0;
+    
+    // Make sure they're the same size.
+    if (size != v.size) {
+        std::cout << "Error, dimension mismatch." << std::endl;
+        return -1;
+    }
+    
+    // Calculate the dot product.
+    for (int i = 0; i < size; i++) {
+        std::cout << params[i] << std::endl;
+        //product += params[i] * v.params[i];
+    }
+    
+    return product;
 }
