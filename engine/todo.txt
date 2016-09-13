@@ -1,0 +1,5 @@
+- overload brackets for setting
+- overload subtraction
+- overload scalar mult
+- overload cross product
+- rotation for vectors
