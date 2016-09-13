@@ -1,3 +1,4 @@
+- template instead of double
 - overload brackets for setting
 - overload cross product
 - rotation for vectors

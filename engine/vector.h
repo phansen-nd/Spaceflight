@@ -5,6 +5,8 @@
  * vector.h - header for a vector class that supports std vector ops.
  */
 
+#include <iostream>
+
 class Vector {
     double *params;
     int size;
@@ -19,10 +21,11 @@ public:
     friend Vector operator * (double, const Vector &);
     friend Vector operator + (const Vector &, const Vector &);
     friend Vector operator - (const Vector &, const Vector &);
+    friend std::ostream & operator << (std::ostream &, const Vector &);
     double operator [] (int);
     
     int getSize() const;
-    void print() const;
+    Vector & cross(const Vector &);
     friend void swap(Vector &v1, Vector &v2);
 };
 
@@ -148,6 +151,14 @@ Vector operator - (const Vector &v1, const Vector &v2) {
     return v;
 }
 
+// Printing.
+std::ostream & operator << (std::ostream &os, const Vector &v) {
+    for (int i = 0; i < v.size; i++) {
+        os << v.params[i] << " ";
+    }
+    return os;
+}
+
 // Element access.
 double Vector::operator [] (int i) {
     
@@ -160,13 +171,11 @@ double Vector::operator [] (int i) {
     return params[i];
 }
 
-int Vector::getSize() const {
-  return size;
+// Cross product.
+Vector & crossProduct(const Vector & v1) {
+    
 }
 
-void Vector::print() const {
-    for (int i = 0; i < size; i++) {
-        std::cout << params[i] << " ";
-    }
-    std::cout << std::endl;
+int Vector::getSize() const {
+  return size;
 }
