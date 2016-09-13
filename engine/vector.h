@@ -14,7 +14,9 @@ public:
     ~Vector();
     
     friend double operator * (const Vector &, const Vector &);
+    friend Vector operator * (double, const Vector &);
     friend Vector operator + (const Vector &, const Vector &);
+    friend Vector operator - (const Vector &, const Vector &);
     double operator [] (int);
     
     int getSize() const;
@@ -67,6 +69,18 @@ double operator * (const Vector &v1, const Vector &v2) {
     return dot;
 }
 
+// Scalar multiplication.
+Vector operator * (double d, const Vector &v1) {
+    
+    Vector v = Vector(v1.params, v1.size);
+    
+    for (int i = 0; i < v.size; i++) {
+        v.params[i] *= d;
+    }
+    
+    return v;
+}
+
 // Vector addition.
 Vector operator + (const Vector &v1, const Vector &v2) {
     
@@ -81,6 +95,25 @@ Vector operator + (const Vector &v1, const Vector &v2) {
     // Add them up.
     for (int i = 0; i < v1.size; i++) {
         v.params[i] += v2.params[i];
+    }
+    
+    return v;
+}
+
+// Vector subtraction.
+Vector operator - (const Vector &v1, const Vector &v2) {
+    
+    Vector v = Vector(v1.params, v1.size);
+    
+    // Make sure they're the same size.
+    if (!checkDimensions(v1, v2)) {
+        std::cout << "Error adding vectors, returning first argument." << std::endl;
+        return v;
+    }
+    
+    // Subtract elementwise.
+    for (int i = 0; i < v1.size; i++) {
+        v.params[i] -= v2.params[i];
     }
     
     return v;

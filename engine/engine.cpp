@@ -24,12 +24,20 @@ int main (void) {
     cout << "v2: ";
     v2.print();
     
-    cout << "dot product: " << v1*v2 << endl;
+    cout << "v1 * v2: " << v1*v2 << endl;
     
     Vector v3 = v1 + v2;
-    cout << "sum: ";
+    cout << "v3 = v1 + v2: ";
     v3.print();
     
-    cout << "second elem of sum: " << v3[1] << endl;
+    cout << "v3[1]: " << v3[1] << endl;
+    
+    Vector v4 = v3 - v1;
+    cout << "v4 = v3 - v1: ";
+    v4.print();
+    
+    Vector v5 = 2 * v1;
+    cout << "v5 = 2 * v1: ";
+    v5.print();
   
 }
