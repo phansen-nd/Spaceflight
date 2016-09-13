@@ -14,6 +14,7 @@ public:
     Vector(const Vector &);
     ~Vector();
     
+    Vector & operator = (Vector);
     friend double operator * (const Vector &, const Vector &);
     friend Vector operator * (double, const Vector &);
     friend Vector operator + (const Vector &, const Vector &);
@@ -22,6 +23,7 @@ public:
     
     int getSize() const;
     void print() const;
+    friend void swap(Vector &v1, Vector &v2);
 };
 
 
@@ -32,6 +34,14 @@ int checkDimensions(const Vector &v1, const Vector &v2) {
     }
     std::cout << "Error, dimension mismatch." << std::endl;
     return 0;
+}
+
+void swap(Vector &v1, Vector &v2) {
+    
+    using std::swap;
+    
+    swap(v1.size, v2.size);
+    swap(v1.params, v2.params);
 }
 
 // --------------------------------------------------------------------- //
@@ -62,6 +72,12 @@ Vector::Vector(const Vector & v) {
 // Destructor.
 Vector::~Vector() {
     delete[] params;
+}
+
+// Copy assignment operator.
+Vector & Vector::operator = (Vector v1) {
+    swap(*this, v1);
+    return *this;
 }
 
 // Dot product.

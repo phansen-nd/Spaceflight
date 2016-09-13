@@ -48,7 +48,13 @@ int main (void) {
     v5.print();
   
     // Copy constructor.
-    Vector v6 = v1;
+    Vector v6 = Vector(v1);
     cout << "Copying v1 to v6: ";
     v6.print();
+    
+    // Copy assignment operator.
+    Vector v7 = v1; // This is actually going to call copy con.
+    v7 = v2; // Here's the copy ass op.
+    cout << "Copying v2 to v7: ";
+    v7.print();
 }
