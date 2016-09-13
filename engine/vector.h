@@ -10,17 +10,32 @@ class Vector {
     int size;
 
 public:
-    Vector(int, const double *);
+    Vector(const double *, int);
     ~Vector();
     
-    friend double operator*(const Vector &, const Vector &);
+    friend double operator * (const Vector &, const Vector &);
+    friend Vector operator + (const Vector &, const Vector &);
+    double operator [] (int);
     
     int getSize() const;
-    double dot(const Vector *) const;
-
+    void print() const;
 };
 
-Vector::Vector(int s, const double *arr) {
+
+// Helper function.
+int checkDimensions(const Vector &v1, const Vector &v2) {
+    if (v1.getSize() == v2.getSize()) {
+        return 1;
+    }
+    std::cout << "Error, dimension mismatch." << std::endl;
+    return 0;
+}
+
+// --------------------------------------------------------------------- //
+// ------------------------ Implementation ----------------------------- //
+// --------------------------------------------------------------------- //
+
+Vector::Vector(const double *arr, int s) {
     size = s;
     
     // Initialize params.
@@ -35,12 +50,11 @@ Vector::~Vector() {
 }
 
 // Dot product.
-double operator* (const Vector &v1, const Vector &v2) {
+double operator * (const Vector &v1, const Vector &v2) {
     double dot = 0;
     
     // Make sure they're the same size.
-    if (v1.size != v2.size) {
-        std::cout << "Error, dimension mismatch." << std::endl;
+    if (!checkDimensions(v1, v2)) {
         return -1;
     }
     
@@ -53,6 +67,32 @@ double operator* (const Vector &v1, const Vector &v2) {
     return dot;
 }
 
+// Vector addition.
+Vector operator + (const Vector &v1, const Vector &v2) {
+    
+    Vector v = Vector(v1.params, v1.size);
+    
+    // Make sure they're the same size.
+    if (!checkDimensions(v1, v2)) {
+        std::cout << "Error adding vectors, returning first argument." << std::endl;
+        return v;
+    }
+    
+    // Add them up.
+    for (int i = 0; i < v1.size; i++) {
+        v.params[i] += v2.params[i];
+    }
+    
+    return v;
+}
+
 int Vector::getSize() const {
   return size;
+}
+
+void Vector::print() const {
+    for (int i = 0; i < size; i++) {
+        std::cout << params[i] << " ";
+    }
+    std::cout << std::endl;
 }

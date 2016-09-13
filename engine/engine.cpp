@@ -15,10 +15,19 @@ int main (void) {
     const double arr[3] = {3, 6, 1};
     const double arr2[3] = {1, 1, 3};
     
-    Vector v1 = Vector(3, arr);
-    Vector v2 = Vector(3, arr2);
-    cout << "v1 size: " << v1.getSize() << endl;
-    cout << "v2 size: " << v2.getSize() << endl;
+    Vector v1 = Vector(arr, 3);
+    Vector v2 = Vector(arr2, 3);
+    
+    cout << "v1: ";
+    v1.print();
+    
+    cout << "v2: ";
+    v2.print();
+    
     cout << "dot product: " << v1*v2 << endl;
+    
+    Vector v3 = v1 + v2;
+    cout << "sum: ";
+    v3.print();
   
 }
