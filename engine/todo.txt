@@ -1,3 +1,2 @@
 - template instead of double
-- overload brackets for setting
 - rotation for vectors

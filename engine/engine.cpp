@@ -55,4 +55,9 @@ int main (void) {
     // Cross product.
     Vector v8 = v1.cross(v2);
     cout << "v1 x v2 = v8: " << v8 << endl;
+    
+    // Try bracket assignment.
+    cout << "v1[1]: " << v1[1] << endl;
+    v1[1] = 7;
+    cout << "v1[1]: " << v1[1] << endl;
 }

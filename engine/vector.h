@@ -23,6 +23,7 @@ public:
     friend Vector operator - (const Vector &, const Vector &);
     friend std::ostream & operator << (std::ostream &, const Vector &);
     double operator [] (int) const;
+    double & operator [] (int);
     
     int getSize() const;
     Vector cross(const Vector &) const;
@@ -163,11 +164,18 @@ std::ostream & operator << (std::ostream &os, const Vector &v) {
 double Vector::operator [] (int i) const {
     
     // Make sure it's in bounds.
-    if (i > (size - 1)) {
+    if (i > (size - 1) || i < 0) {
         std::cout << "Error - out of bounds access." << std::endl;
         return -1;
     }
     
+    return params[i];
+}
+
+// Element access to allow setting, not just getting.
+// This is important because it needs to return an assignable
+//  location (reference), not just a value.
+double & Vector::operator [] (int i) {
     return params[i];
 }
 
