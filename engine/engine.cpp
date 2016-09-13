@@ -12,12 +12,13 @@ using namespace std;
 
 int main (void) {
   
-    double arr[3] = {3, 6, 1};
-    cout << arr[2] << endl;
+    const double arr[3] = {3.0, 6.0, 1.0};
+    const double arr2[3] = {1.0, 1.0, 2.0};
     
-    Vector v1 = Vector(4, arr);
-    Vector v2 = Vector(4, arr);
-    cout << v1.getSize() << endl;
-    cout << v1.dot(v2) << endl;
+    Vector v1 = Vector(3, arr);
+    Vector v2 = Vector(3, arr2);
+    cout << "v1 size: " << v1.getSize() << endl;
+    cout << "v2 size: " << v2.getSize() << endl;
+    cout << "dot product: " << v1.dot(&v2) << endl;
   
 }

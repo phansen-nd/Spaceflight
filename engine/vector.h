@@ -10,17 +10,20 @@ class Vector {
     int size;
 
 public:
-    Vector(int, double *);
+    Vector(int, const double *);
+    Vector(const Vector &v);
     ~Vector();
     int getSize() const;
-    double dot(Vector) const;
+    double dot(const Vector *) const;
 
 };
 
-Vector::Vector(int s, double *arr) {
+Vector::Vector(int s, const double *arr) {
     size = s;
     
-    for (int i = 0; i < s; i++) {
+    // Initialize params.
+    params = new double[size]();
+    for (int i = 0; i < size; i++) {
         params[i] = arr[i];
     }
 }
@@ -34,20 +37,20 @@ int Vector::getSize() const {
 }
 
 
-double Vector::dot(Vector v) const {
+double Vector::dot(const Vector *v) const {
     
     double product = 0;
     
     // Make sure they're the same size.
-    if (size != v.size) {
+    if (size != v->size) {
         std::cout << "Error, dimension mismatch." << std::endl;
         return -1;
     }
     
     // Calculate the dot product.
     for (int i = 0; i < size; i++) {
-        std::cout << params[i] << std::endl;
-        //product += params[i] * v.params[i];
+        //std::cout << params[i] << std::endl;
+        product += params[i] * v->params[i];
     }
     
     return product;
