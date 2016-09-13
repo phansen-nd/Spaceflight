@@ -22,10 +22,10 @@ public:
     friend Vector operator + (const Vector &, const Vector &);
     friend Vector operator - (const Vector &, const Vector &);
     friend std::ostream & operator << (std::ostream &, const Vector &);
-    double operator [] (int);
+    double operator [] (int) const;
     
     int getSize() const;
-    Vector & cross(const Vector &);
+    Vector cross(const Vector &) const;
     friend void swap(Vector &v1, Vector &v2);
 };
 
@@ -160,7 +160,7 @@ std::ostream & operator << (std::ostream &os, const Vector &v) {
 }
 
 // Element access.
-double Vector::operator [] (int i) {
+double Vector::operator [] (int i) const {
     
     // Make sure it's in bounds.
     if (i > (size - 1)) {
@@ -172,7 +172,24 @@ double Vector::operator [] (int i) {
 }
 
 // Cross product.
-Vector & crossProduct(const Vector & v1) {
+Vector Vector::cross(const Vector & v1) const {
+
+    Vector v = *this;
+    
+    if (size != 3 || v1.size != 3) {
+        std::cout << "Error - vectors must both be three dimensional to computer cross product." << std:: endl;
+        return v;
+    }
+    
+    double a = params[1] * v1[2] - params[2] * v1[1];
+    double b = params[2] * v1[0] - params[0] * v1[2];
+    double c = params[0] * v1[1] - params[1] * v1[0];
+    
+    double arr[3] = {a, b, c};
+    
+    Vector product = Vector(arr, 3);
+    
+    return product;
     
 }
 

@@ -51,4 +51,8 @@ int main (void) {
     Vector v7 = v1; // This is actually going to call copy con.
     v7 = v2; // Here's the copy ass op.
     cout << "Copying v2 to v7: " << v7 << endl;
+    
+    // Cross product.
+    Vector v8 = v1.cross(v2);
+    cout << "v1 x v2 = v8: " << v8 << endl;
 }
