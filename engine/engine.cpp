@@ -29,5 +29,7 @@ int main (void) {
     Vector v3 = v1 + v2;
     cout << "sum: ";
     v3.print();
+    
+    cout << "second elem of sum: " << v3[1] << endl;
   
 }
