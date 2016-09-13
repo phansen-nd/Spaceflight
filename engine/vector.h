@@ -11,6 +11,7 @@ class Vector {
 
 public:
     Vector(const double *, int);
+    Vector(const Vector &);
     ~Vector();
     
     friend double operator * (const Vector &, const Vector &);
@@ -37,6 +38,7 @@ int checkDimensions(const Vector &v1, const Vector &v2) {
 // ------------------------ Implementation ----------------------------- //
 // --------------------------------------------------------------------- //
 
+// Constructor.
 Vector::Vector(const double *arr, int s) {
     size = s;
     
@@ -47,6 +49,17 @@ Vector::Vector(const double *arr, int s) {
     }
 }
 
+// Copy constructor.
+Vector::Vector(const Vector & v) {
+    size = v.size;
+    
+    params = new double[size]();
+    for (int i = 0; i < size; i++) {
+        params[i] = v.params[i];
+    }
+}
+
+// Destructor.
 Vector::~Vector() {
     delete[] params;
 }

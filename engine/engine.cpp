@@ -15,29 +15,40 @@ int main (void) {
     const double arr[3] = {3, 6, 1};
     const double arr2[3] = {1, 1, 3};
     
+    // Constructor.
     Vector v1 = Vector(arr, 3);
     Vector v2 = Vector(arr2, 3);
     
+    // Print.
     cout << "v1: ";
     v1.print();
     
     cout << "v2: ";
     v2.print();
     
+    // Dot product.
     cout << "v1 * v2: " << v1*v2 << endl;
     
+    // Vector addition.
     Vector v3 = v1 + v2;
     cout << "v3 = v1 + v2: ";
     v3.print();
     
+    // Element access.
     cout << "v3[1]: " << v3[1] << endl;
     
+    // Vector subtraction.
     Vector v4 = v3 - v1;
     cout << "v4 = v3 - v1: ";
     v4.print();
     
+    // Scalar multiplication.
     Vector v5 = 2 * v1;
     cout << "v5 = 2 * v1: ";
     v5.print();
   
+    // Copy constructor.
+    Vector v6 = v1;
+    cout << "Copying v1 to v6: ";
+    v6.print();
 }
