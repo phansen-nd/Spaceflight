@@ -86,6 +86,18 @@ Vector operator + (const Vector &v1, const Vector &v2) {
     return v;
 }
 
+// Element access.
+double Vector::operator [] (int i) {
+    
+    // Make sure it's in bounds.
+    if (i > (size - 1)) {
+        std::cout << "Error - out of bounds access." << std::endl;
+        return -1;
+    }
+    
+    return params[i];
+}
+
 int Vector::getSize() const {
   return size;
 }
