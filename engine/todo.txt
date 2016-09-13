@@ -1,2 +1,1 @@
-- template instead of double
 - rotation for vectors

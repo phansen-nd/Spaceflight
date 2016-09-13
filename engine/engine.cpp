@@ -12,8 +12,8 @@ using namespace std;
 
 int main (void) {
   
-    const double arr[3] = {3, 6, 1};
-    const double arr2[3] = {1, 1, 3};
+    const double arr[3] = {0, 1, 0};
+    const double arr2[3] = {0, 0, 1};
     
     // Constructor.
     Vector v1 = Vector(arr, 3);
@@ -24,6 +24,7 @@ int main (void) {
     
     cout << "v2: " << v2 << endl;
     
+    /*
     // Dot product.
     cout << "v1 * v2: " << v1*v2 << endl;
     
@@ -56,8 +57,13 @@ int main (void) {
     Vector v8 = v1.cross(v2);
     cout << "v1 x v2 = v8: " << v8 << endl;
     
-    // Try bracket assignment.
+    // Bracket assignment.
     cout << "v1[1]: " << v1[1] << endl;
-    v1[1] = 7;
+    //v1[1] = 7;
     cout << "v1[1]: " << v1[1] << endl;
+    */
+    
+    // Rotation.
+    Vector v9 = v1.rotate(v2, 180);
+    cout << "v1 rotated about v2 by 90 degrees: " << v9 << endl;
 }

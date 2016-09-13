@@ -6,17 +6,24 @@
  */
 
 #include <iostream>
+#include <math.h>
+
+#define PI 3.14159265
 
 class Vector {
     double *params;
     int size;
 
 public:
+    
+    // Constructors.
     Vector(const double *, int);
     Vector(const Vector &);
     ~Vector();
     
+    // Operators.
     Vector & operator = (Vector);
+    friend void swap(Vector &v1, Vector &v2);
     friend double operator * (const Vector &, const Vector &);
     friend Vector operator * (double, const Vector &);
     friend Vector operator + (const Vector &, const Vector &);
@@ -25,9 +32,10 @@ public:
     double operator [] (int) const;
     double & operator [] (int);
     
+    // Member functions.
     int getSize() const;
     Vector cross(const Vector &) const;
-    friend void swap(Vector &v1, Vector &v2);
+    Vector rotate(const Vector &, double);
 };
 
 
@@ -179,6 +187,10 @@ double & Vector::operator [] (int i) {
     return params[i];
 }
 
+int Vector::getSize() const {
+    return size;
+}
+
 // Cross product.
 Vector Vector::cross(const Vector & v1) const {
 
@@ -201,6 +213,67 @@ Vector Vector::cross(const Vector & v1) const {
     
 }
 
-int Vector::getSize() const {
-  return size;
+Vector Vector::rotate(const Vector & v1, double angle) {
+    
+    // Initialize some easy-to-use variables.
+    angle = angle * PI / 180;
+    double x = this->params[0];
+    double y = this->params[1];
+    double z = this->params[2];
+    double xax = v1[0];
+    double yax = v1[1];
+    double zax = v1[2];
+    double x2 = xax * xax;
+    double y2 = yax * yax;
+    double z2 = zax * zax;
+    double L = (x2 + y2 + z2);
+    double mat[4][4];
+    
+    // Set up rotation matrix.
+    mat[0][0] = (x2 + (y2 + z2) * cos(angle)) / L;
+    mat[0][1] = (x * y * (1 - cos(angle)) - z * sqrt(L) * sin(angle)) / L;
+    mat[0][2] = (x * z * (1 - cos(angle)) + y * sqrt(L) * sin(angle)) / L;
+    mat[0][3] = 0.0;
+    
+    mat[1][0] = (x * y * (1 - cos(angle)) + z * sqrt(L) * sin(angle)) / L;
+    mat[1][1] = (y2 + (x2 + z2) * cos(angle)) / L;
+    mat[1][2] = (y * z * (1 - cos(angle)) - x * sqrt(L) * sin(angle)) / L;
+    mat[1][3] = 0.0;
+    
+    mat[2][0] = (x * z * (1 - cos(angle)) - y * sqrt(L) * sin(angle)) / L;
+    mat[2][1] = (y * z * (1 - cos(angle)) + x * sqrt(L) * sin(angle)) / L;
+    mat[2][2] = (z2 + (x2 + y2) * cos(angle)) / L;
+    mat[2][3] = 0.0;
+    
+    mat[3][0] = 0.0;
+    mat[3][1] = 0.0;
+    mat[3][2] = 0.0;
+    mat[3][3] = 1.0;
+    
+    // Set up input vector.
+    double input[4][1];
+    double output[4][1];
+    
+    input[0][0] = x;
+    input[1][0] = y;
+    input[2][0] = z;
+    input[3][0] = 1.0;
+    
+    // Do the rotation.
+    for(int i = 0; i < 4; i++ ){
+        for(int j = 0; j < 1; j++){
+            output[i][j] = 0;
+            for(int k = 0; k < 4; k++){
+                output[i][j] += mat[i][k] * input[k][j];
+            }
+        }
+    }
+    
+    double arr[3] = {output[0][0], output[1][0], output[2][0]};
+    
+    Vector rotated = Vector(arr, 3);
+    
+    return rotated;
 }
+
+
