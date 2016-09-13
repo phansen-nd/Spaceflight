@@ -11,4 +11,4 @@ engine.o: engine.cpp vector.h
 	$(CC) $(CFLAGS) engine.cpp
 
 clean:
-	\rm *.o *~ engine
+	rm -f *.o *~ engine

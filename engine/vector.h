@@ -11,8 +11,10 @@ class Vector {
 
 public:
     Vector(int, const double *);
-    Vector(const Vector &v);
     ~Vector();
+    
+    friend double operator*(const Vector &, const Vector &);
+    
     int getSize() const;
     double dot(const Vector *) const;
 
@@ -32,26 +34,25 @@ Vector::~Vector() {
     delete[] params;
 }
 
-int Vector::getSize() const {
-  return size;
-}
-
-
-double Vector::dot(const Vector *v) const {
-    
-    double product = 0;
+// Dot product.
+double operator* (const Vector &v1, const Vector &v2) {
+    double dot = 0;
     
     // Make sure they're the same size.
-    if (size != v->size) {
+    if (v1.size != v2.size) {
         std::cout << "Error, dimension mismatch." << std::endl;
         return -1;
     }
     
     // Calculate the dot product.
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < v1.size; i++) {
         //std::cout << params[i] << std::endl;
-        product += params[i] * v->params[i];
+        dot += v1.params[i] * v2.params[i];
     }
     
-    return product;
+    return dot;
+}
+
+int Vector::getSize() const {
+  return size;
 }
