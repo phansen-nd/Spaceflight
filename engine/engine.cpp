@@ -12,7 +12,7 @@ using namespace std;
 
 int main (void) {
   
-    const double arr[3] = {0, 1, 0};
+    const double arr[3] = {3, 6, 1};
     const double arr2[3] = {0, 0, 1};
     
     // Constructor.
@@ -64,6 +64,6 @@ int main (void) {
     */
     
     // Rotation.
-    Vector v9 = v1.rotate(v2, 180);
+    Vector v9 = v1.rotate(v2, 90);
     cout << "v1 rotated about v2 by 90 degrees: " << v9 << endl;
 }

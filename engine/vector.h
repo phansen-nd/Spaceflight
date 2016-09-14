@@ -231,17 +231,17 @@ Vector Vector::rotate(const Vector & v1, double angle) {
     
     // Set up rotation matrix.
     mat[0][0] = (x2 + (y2 + z2) * cos(angle)) / L;
-    mat[0][1] = (x * y * (1 - cos(angle)) - z * sqrt(L) * sin(angle)) / L;
-    mat[0][2] = (x * z * (1 - cos(angle)) + y * sqrt(L) * sin(angle)) / L;
+    mat[0][1] = (xax * yax * (1 - cos(angle)) - zax* sqrt(L) * sin(angle)) / L;
+    mat[0][2] = (xax * zax* (1 - cos(angle)) + yax * sqrt(L) * sin(angle)) / L;
     mat[0][3] = 0.0;
     
-    mat[1][0] = (x * y * (1 - cos(angle)) + z * sqrt(L) * sin(angle)) / L;
+    mat[1][0] = (xax * yax * (1 - cos(angle)) + zax* sqrt(L) * sin(angle)) / L;
     mat[1][1] = (y2 + (x2 + z2) * cos(angle)) / L;
-    mat[1][2] = (y * z * (1 - cos(angle)) - x * sqrt(L) * sin(angle)) / L;
+    mat[1][2] = (yax * zax* (1 - cos(angle)) - xax * sqrt(L) * sin(angle)) / L;
     mat[1][3] = 0.0;
     
-    mat[2][0] = (x * z * (1 - cos(angle)) - y * sqrt(L) * sin(angle)) / L;
-    mat[2][1] = (y * z * (1 - cos(angle)) + x * sqrt(L) * sin(angle)) / L;
+    mat[2][0] = (xax * zax* (1 - cos(angle)) - yax * sqrt(L) * sin(angle)) / L;
+    mat[2][1] = (yax * zax* (1 - cos(angle)) + xax * sqrt(L) * sin(angle)) / L;
     mat[2][2] = (z2 + (x2 + y2) * cos(angle)) / L;
     mat[2][3] = 0.0;
     
@@ -275,5 +275,3 @@ Vector Vector::rotate(const Vector & v1, double angle) {
     
     return rotated;
 }
-
-
